@@ -14,68 +14,81 @@
   		
 <script>
 	$(document).ready(function(){
-		var idChamado = sessionStorage.getItem("idChamado");	
-		document.getElementById("nomeChamado").value = idChamado;
-		$('form').submit(function(e){    
-			
-			e.preventDefault();
-			
-			
-			
-			var nomeChamado = $('#nomeChamado').val().trim();
-			var descricaoChamado = $('#descricaoChamado').val().trim();
-			var chamadoResolvido = $('#chamadoResolvido').val().trim();
-			
-			
-			$.post("/alterado", JSON.stringify({'idChamado': idChamado, 'nomeChamado': nomeChamado, 'descricaoChamado': descricaoChamado, 'chamadoResolvido': chamadoResolvido}), function(data){
-					
-				if(data[0].alterado){
-					window.location.href = '/index.html';
-					
-				} else {
+		document.getElementById("nomeChamado").value = sessionStorage.getItem("nomeChamado");
+		document.getElementById("descricaoChamado").value = sessionStorage.getItem("descricaoChamado");
+		document.getElementById("resolvidoChamado").value = sessionStorage.getItem("resolvidoChamado");
+		$('form').submit(function(e){  
 				
-					window.location.href = '/index.html';
 				
-				}
+				e.preventDefault();
+				
+				
+				var nomeChamado = $('#nomeChamado').val().trim();
+				var descricaoChamado = $('#descricaoChamado').val().trim();
+				var resolvidoChamado = $('#resolvidoChamado').val().trim();
+				var idChamado = sessionStorage.getItem("idChamado");
+				
+				
+				
+				$.getJSON("/alterado/"+idChamado+"/"+nomeChamado+"/"+descricaoChamado+"/"+resolvidoChamado+"?format=json&jsoncallback=",function(data) {
+					
+					if(!data[0].alterado){
+
+						alert("Chamado não Encontrado");
+						
+					} else {
+					
+						alert("Chamado Alterado com Sucesso");
+						window.location.href = '/pesquisarchamadoid.html';
+
+					}
 					
 					
-			}, "json");
+					
+				});
 			
 		});
+		
 	});
+
 </script>
 		
   
  
-	
+</head>
  <body>
   
 	<br>
 	<br>
+	
 	<form class="form-horizontal" method="post" id="form">
 		<div class="form-group">
-		<label for="textarea" class="col-md-4 control-label">Nome Chamado</label>
+			<label for="imput" class="col-md-4 control-label" >Nome Chamado</label>
 			<div class="col-md-4">
-				<textarea id = "nomeChamado"  required = "required" rows="1" cols="50" ></textarea>
+				<textarea id = "nomeChamado"  required = "required" rows="1" cols = "50" ></textarea>
 			</div>
 		</div>
+		<br>		
 		<div class="form-group">
-		<label for="textarea" class="col-md-4 control-label">Descrição Chamado</label>
+			<label for="textarea" class="col-md-4 control-label">Descricao Chamado</label>
 			<div class="col-md-4">
-				<textarea id = "descricaoChamado" required = "required" rows="4" cols="50"></textarea>
-			</div>
-		</div>
-		<label for="select" class="col-md-4 control-label">O chamado foi concluído?</label>
-			<div class="col-md-4">
-				<select name = "chamadoResolvido" required = "required">
-					<option value = "0">Não</option>
-					<option value = "1">Sim</option>
-				</select>
+				<textarea id = "descricaoChamado"  required = "required" rows="4" cols="50" ></textarea>
 			</div>
 		</div>
 		<br>
-		<button id="alterado" type="submit" class="btn btn-primary col-md-offset-4 col-md-4">Concluir</button>
+
+	<div class="form-group">
+			<label for="select" class="col-md-4 control-label" >Chamado foi Concluído?</label>
+			<div class="col-md-4">
+				<select id = "resolvidoChamado">
+				  <option value="0">Não</option>
+				  <option value="1">Sim</option>
+				</select>
+			</div>
+	</div>
+	<button id="Alterar" type="submit" class="btn btn-primary col-md-offset-4 col-md-4">Pesquisar</button>
+
 	</form>
-</body>
- </head>
+	
+ </body>
 </html>

@@ -27,6 +27,7 @@
 				var descricaoChamado = $('#descricaoChamado').val().trim();
 				var resolvidoChamado = $('#resolvidoChamado').val().trim();
 				var idChamado = sessionStorage.getItem("idChamado");
+				alert(resolvidoChamado);
 				
 				
 				$.getJSON("/alterado/"+idChamado+"/"+nomeChamado+"/"+descricaoChamado+"/"+resolvidoChamado+"?format=json&jsoncallback=",function(data) {

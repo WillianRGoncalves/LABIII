@@ -16,6 +16,8 @@ public class Chamado {
 		this.descricao = descricao;
 		this.data = data;
 	}
+	
+	
 	public int getId() {
 		return id;
 	}

@@ -115,7 +115,8 @@ public void pesquisarChamado(){
 
 		        		jsonObj.put("nome", chamado.getNome());
 		        		jsonObj.put("descricao", chamado.getDescricao());
-		        		jsonObj.put("resolvido", chamado.isResolvido());
+		        		if(chamado.isResolvido())	jsonObj.put("resolvido", "1");
+		        		else						jsonObj.put("resolvido", "0");
 		        		
 		             	jsonResult.put(jsonObj);
 		             	
@@ -158,43 +159,60 @@ public void pesquisarChamado(){
 	
 public void alterarChamado(){
 	
-	post("/alterado", new Route() {
+	get("/alterado/:idChamado/:nomeChamado/:descricaoChamado/:resolvidoChamado", new Route() {
 		@Override
         public Object handle(final Request request, final Response response){
         	
-           response.header("Access-Control-Allow-Origin", "*");
-
-        	
-        	
-        	
-           JSONObject json = new JSONObject(request.body());
-        	
-           String idChamado = json.getString("idChamado");
-           String nomeChamado = json.getString("nomeChamado");
-           String descricaoChamado = json.getString("descricaoChamado");
-           String resolvidoChamado = json.getString("chamadoResolvido");
-           boolean resolvido = (Integer.parseInt(resolvidoChamado) != 0);
-     	    
-           /*try {
-        	  
+        	 
+        	 
+        	response.header("Access-Control-Allow-Origin", "*");
+        	 
+            
+            
+            try {
+            	char resolvido = request.params(":resolvidoChamado").charAt(0);
+            	boolean alterado = model.editarChamado(request.params(":idChamado"), request.params(":nomeChamado"), request.params(":descricaoChamado"), resolvido);
+            	
+            	//if(user != null){
+            		
+            		JSONArray jsonResult = new JSONArray();
+	         	    JSONObject jsonObj = new JSONObject();
+	         	    
+	         	    jsonObj.put("alterado", alterado);
+	        				        		
+	             	jsonResult.put(jsonObj);
+	             	
+	             	return jsonResult;
+            		
+            	//} else {
+            		
+            		
+            		
+            	//}
+            	
+            	
+             	
         		} catch (JSONException e) {
         				
         			//e.printStackTrace();
 
-        		}*/
-     	   
-           boolean alterado = model.editarChamado(Integer.parseInt(idChamado),nomeChamado,descricaoChamado,resolvido);
-    	   JSONArray jsonResult = new JSONArray();
-   	       JSONObject jsonObj = new JSONObject();
-   	    
-   	       jsonObj.put("alterado", alterado);
-  		
-   	       jsonResult.put(jsonObj);
-       	
-   	       return jsonResult;
-        	
-	   }
-	});     
+        		}
+         	    	
+
+            JSONArray jsonResult = new JSONArray();
+     	    JSONObject jsonObj = new JSONObject();
+
+    		jsonObj.put("alterado", false);
+    		
+    		
+         	jsonResult.put(jsonObj);
+         	
+         	return jsonResult;
+            
+     	     
+         }
+         
+      });
 
      
 }

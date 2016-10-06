@@ -22,17 +22,19 @@
 				$.post("/pesquisarchamadoid", JSON.stringify({'idChamado': idChamado}), function(data){
 						
 						
-					if(data[0].nome == ""){
-						window.location.href = '/index.html';
+					if(data[0].nome != ""){
+							sessionStorage.setItem("idChamado",idChamado);
+							sessionStorage.setItem("nomeChamado", data[0].nome);
+							sessionStorage.setItem("descricaoChamado", data[0].descricao);
+							sessionStorage.setItem("resolvidoChamado", data[0].resolvido);
+							
+							window.location.href = '/alterado.html';
+						
 						
 					} else {
-					
-						sessionStorage.setItem("nomeChamado",data[0].nome);
-						sessionStorage.setItem("descricaoChamado",data[0].descricao);
-						sessionStorage.setItem("chamadoResolvido",data[0].resolvido);
-						sessionStorage.setItem("idChamado",idChamado);
-					
-						window.location.href = '/alterado.html';
+							
+							alert("Chamado não Encontrado");
+							window.location.href = '/index.html';
 					
 					}
 						
@@ -43,7 +45,7 @@
 		});
 	</script>
 
-   
+
   </head>
   <body>
 		<br>

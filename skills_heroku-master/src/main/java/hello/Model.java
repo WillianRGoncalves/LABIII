@@ -14,14 +14,14 @@ public class Model{
 	ObjectContainer chamados = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "bd/chamados.db4o");
 	
 	
-	public List<User> consultarTodosUsuarios(){
+	private List<User> consultarTodosUsuarios(){
 		Query query = users.query();
 		query.constrain(User.class);
 	    ObjectSet<User> allUsers = query.execute();
 	    return allUsers;
 	}
 	
-	public List<Chamado> consultarTodosChamados(){
+	private List<Chamado> consultarTodosChamados(){
 		Query query = chamados.query();
 		query.constrain(Chamado.class);
 		ObjectSet<Chamado> allChamados = query.execute();
@@ -51,13 +51,21 @@ public class Model{
 		return null;
 	}
 	
-	public boolean editarChamado(Integer id, String nome, String descricao, boolean resolvido){
-		Chamado chamado = pesquisarChamadoId(id);
+	public User pesquisarUsuarioUsername(String username){
+		for(User user: consultarTodosUsuarios()){
+			if(user.getUserName().equals(username)) return user;
+		}
+		return null;
+	}
+	
+	public boolean editarChamado(String id, String nome, String descricao, char resolvido){
+		Chamado chamado = pesquisarChamadoId(Integer.parseInt(id));
 		if (chamado == null) return false;
 		chamado.setNome(nome);
 		chamado.setDescricao(descricao);
-		chamado.setResolvido(resolvido);
+		chamado.setResolvido(resolvido == '1');
 		chamados.store(chamado);
+		chamados.commit();
 		return true;
 	}
 	
@@ -66,6 +74,15 @@ public class Model{
 	    	if(user.getUserName().equals(email) && user.getPassword().equals(senha)) return user;
 	    }
 	    return null;
+	}
+	
+	public boolean darPermissao(String email){
+		User user = pesquisarUsuarioUsername(email);
+		if (user == null) return false;
+		user.setAcesso(1);
+		users.store(user);
+		users.commit();
+		return true;
 	}
 	
 }
