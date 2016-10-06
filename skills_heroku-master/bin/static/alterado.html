@@ -27,18 +27,19 @@
 				var descricaoChamado = $('#descricaoChamado').val().trim();
 				var resolvidoChamado = $('#resolvidoChamado').val().trim();
 				var idChamado = sessionStorage.getItem("idChamado");
-				alert(resolvidoChamado);
+				
 				
 				
 				$.getJSON("/alterado/"+idChamado+"/"+nomeChamado+"/"+descricaoChamado+"/"+resolvidoChamado+"?format=json&jsoncallback=",function(data) {
 					
 					if(!data[0].alterado){
 
-						alert("Deu ruim");
+						alert("Chamado não Encontrado");
+						window.location.href = '/index.html';
 						
 					} else {
 					
-						alert("Deu bom");
+						alert("Chamado Alterado com Sucesso");
 						window.location.href = '/pesquisarchamadoid.html';
 
 					}
