@@ -28,6 +28,10 @@ public class Model{
 		return allChamados;
 	}
 	
+	/*private void excluirAllChamados(){
+		users.delete(arg0);
+	}*/
+	
 	public boolean isFirstUser(){
 		return consultarTodosUsuarios().size() == 0;
 	}
@@ -61,6 +65,7 @@ public class Model{
 	public boolean editarChamado(String id, String nome, String descricao, char resolvido){
 		Chamado chamado = pesquisarChamadoId(Integer.parseInt(id));
 		if (chamado == null) return false;
+		chamado.setId(Integer.parseInt(id));
 		chamado.setNome(nome);
 		chamado.setDescricao(descricao);
 		chamado.setResolvido(resolvido == '1');
