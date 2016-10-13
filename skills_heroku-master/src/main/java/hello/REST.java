@@ -31,7 +31,7 @@ public class REST{
 	}
 	
 	
-	public void getLogin(){
+public void getLogin(){
 		
 		get("/login/:username/:password", new Route() {
 			@Override
@@ -217,6 +217,62 @@ public void alterarChamado(){
      
 }
 	
+public void darPermissaoADM(){
 	
+	get("/darpermissao/:username", new Route() {
+		@Override
+        public Object handle(final Request request, final Response response){
+        	
+        	 
+        	 
+        	response.header("Access-Control-Allow-Origin", "*");
+        	 
+            
+            try {
+            	boolean resultado = model.darPermissao(request.params(":username"));
+            	
+            	if(resultado){
+            		
+            		JSONArray jsonResult = new JSONArray();
+	         	    JSONObject jsonObj = new JSONObject();
+	         	    
+	         	    jsonObj.put("resultado", resultado);
+	        				        		
+	             	jsonResult.put(jsonObj);
+	             	
+	             	return jsonResult;
+            		
+            	} else {
+            		
+            		
+            		
+            	}
+            	
+            	
+             	
+        		} catch (JSONException e) {
+        				
+        			//e.printStackTrace();
+
+        		}
+         	    	
+
+            JSONArray jsonResult = new JSONArray();
+     	    JSONObject jsonObj = new JSONObject();
+
+    		jsonObj.put("resultado", false);
+    		
+    		
+         	jsonResult.put(jsonObj);
+         	
+         	return jsonResult;
+            
+     	     
+         }
+         
+      });
+		
+
+}	
 	
 }

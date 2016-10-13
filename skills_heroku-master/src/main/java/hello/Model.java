@@ -13,6 +13,15 @@ public class Model{
 	ObjectContainer users = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "bd/users.db4o");
 	ObjectContainer chamados = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "bd/chamados.db4o");
 	
+	//Métodos de exclusão para teste estático
+	public void excluirAllChamados(){
+		for(Chamado chamado: consultarTodosChamados()) chamados.delete(chamado);
+	}
+	
+	public void excluirAllUsers(){
+		for(User user: consultarTodosUsuarios()) users.delete(user);
+	}
+	//End métodos de teste estático
 	
 	private List<User> consultarTodosUsuarios(){
 		Query query = users.query();
@@ -27,10 +36,6 @@ public class Model{
 		ObjectSet<Chamado> allChamados = query.execute();
 		return allChamados;
 	}
-	
-	/*private void excluirAllChamados(){
-		users.delete(arg0);
-	}*/
 	
 	public boolean isFirstUser(){
 		return consultarTodosUsuarios().size() == 0;

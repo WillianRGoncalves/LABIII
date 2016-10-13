@@ -35,6 +35,9 @@ public class Teste {
     }
 	
 	public static void initialize (){
+		//Variáveis sendo inicializadas para teste estático
+		model.excluirAllChamados();
+		model.excluirAllUsers();
 		model.addUser(new User("teste@teste.com", "123456"));
 		model.addUser(new User("willian@teste.com", "123456"));
 		model.addUser(new User("novo@teste.com", "abc"));

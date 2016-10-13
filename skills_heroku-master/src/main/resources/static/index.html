@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Login</title>
 	
+    <title>Login</title>
     
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	
@@ -21,11 +21,11 @@
 				var password = $('#password').val().trim();
 				
 				$.getJSON("/login/"+username+"/"+password+"?format=json&jsoncallback=",function(data) {
-					
+					//Melhorar Lógica dos If
 					if(!data[0].acesso){
 						
 						alert("Usuário Comum");
-						window.location.href = '/index.html';
+						window.location.href = '/darpermissao.html';
 						
 					}else{
 						if(data[0].acesso){
