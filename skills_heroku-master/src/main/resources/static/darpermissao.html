@@ -14,24 +14,30 @@
 	<script>
 		$(document).ready(function(){
 			$('form').submit(function(e){    
-				alert(oi);
 				
 				e.preventDefault();
-				var username = $('#username').val().trim();
 				
-				$.getJSON("/darpermissao/"+username+"?format=json&jsoncallback=",function(data) {
+				var username = $('#username').val().trim();
+				var password = $('#password').val().trim();
+				
+				$.getJSON("/login/"+username+"/"+password+"?format=json&jsoncallback=",function(data) {
 					//Melhorar Lógica dos If
-					if(data[0].resultado){
-						alert("Usuário ADM");
-						window.location.href = '/index.html';
+					if(!data[0].acesso){
+						
+						alert("Usuário Comum");
+						window.location.href = '/darpermissao.html';
 						
 					}else{
-						alert("Usuário não cadastrado");
-						window.location.href = '/darpermissao.html';
+						if(data[0].acesso){
+							window.location.href = '/pesquisarchamadoid.html';
+						}else{
+							alert("Usuário não cadastrado");
+							window.location.href = '/index.html';
+						}
+					
+						
+
 					}
-					
-					
-					
 					
 					
 					
@@ -51,8 +57,15 @@
 				<div class="col-md-4">
 					<input required="required" type="email" class="form-control" id="username" placeholder="Email">
 				</div>
-			</div>			
-			<button id="concluir" type="submit" class="btn btn-primary col-md-offset-4 col-md-4">Concluir</button>
+			</div>
+			<div class="form-group">
+				<label for="inputPassword3" class="col-md-4 control-label">Password</label>
+				<div class="col-md-4">
+					<input required="required" type="password" class="form-control" id="password" placeholder="Password">
+				</div>
+			</div>
+			
+			<button id="login" type="submit" class="btn btn-primary col-md-offset-4 col-md-4">Login</button>
 		</form>
 		
 		
