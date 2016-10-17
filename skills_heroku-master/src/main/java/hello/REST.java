@@ -220,26 +220,22 @@ public void alterarChamado(){
 
 //TODO: ALTERAÇÕES NA REST, ESTE MÉTODO REFAZER
 public void darPermissaoADM(){
-	
 	get("/darpermissao/:username", new Route() {
 		@Override
         public Object handle(final Request request, final Response response){
         	
-        	 
-        	 
-        	response.header("Access-Control-Allow-Origin", "*");
-        	 
-            
-            try {
-            	boolean resultado = model.darPermissao(request.params(":username"));
+           response.header("Access-Control-Allow-Origin", "*");
+   	    
+           try {
+        	   boolean resultado = model.darPermissao(request.params(":username"));
             	
             	if(resultado){
             		
             		JSONArray jsonResult = new JSONArray();
 	         	    JSONObject jsonObj = new JSONObject();
-	         	    
-	         	    jsonObj.put("resultado", resultado);
-	        				        		
+
+	        		jsonObj.put("resultado", resultado);
+	        		
 	             	jsonResult.put(jsonObj);
 	             	
 	             	return jsonResult;
@@ -260,21 +256,20 @@ public void darPermissaoADM(){
          	    	
 
             JSONArray jsonResult = new JSONArray();
-     	    JSONObject jsonObj = new JSONObject();
+    	    JSONObject jsonObj = new JSONObject();
 
-    		jsonObj.put("resultado", false);
-    		
-    		
-         	jsonResult.put(jsonObj);
-         	
-         	return jsonResult;
-            
-     	     
-         }
-         
-      });
-		
+    	    jsonObj.put("resultado", false);
 
-}	
+   		
+        	jsonResult.put(jsonObj);
+        	
+        	return jsonResult;
+     	   
+     	   
+        	
+	   }
+	});     
+
+}
 	
 }

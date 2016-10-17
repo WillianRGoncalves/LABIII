@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 	
-    <title>Login</title>
+    <title>Permissão</title>
     
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	
@@ -16,31 +16,23 @@
 			$('form').submit(function(e){    
 				
 				e.preventDefault();
-				
+				alert("Entrou");
 				var username = $('#username').val().trim();
-				var password = $('#password').val().trim();
 				
-				$.getJSON("/login/"+username+"/"+password+"?format=json&jsoncallback=",function(data) {
-					//Melhorar Lógica dos If
-					if(!data[0].acesso){
+				$.getJSON("/darpermissao/"+username+"?format=json&jsoncallback=",function(data) {
+					
+					if(!data[0].resultado){
 						
-						alert("Usuário Comum");
+						alert("Usuário Não Econtrado");
 						window.location.href = '/darpermissao.html';
 						
 					}else{
-						if(data[0].acesso){
-							window.location.href = '/pesquisarchamadoid.html';
-						}else{
-							alert("Usuário não cadastrado");
-							window.location.href = '/index.html';
-						}
+						alert("Novo ADM yay");
+						window.location.href = '/index.html';
+					}
 					
 						
 
-					}
-					
-					
-					
 				});
 			});
 		});
@@ -58,19 +50,8 @@
 					<input required="required" type="email" class="form-control" id="username" placeholder="Email">
 				</div>
 			</div>
-			<div class="form-group">
-				<label for="inputPassword3" class="col-md-4 control-label">Password</label>
-				<div class="col-md-4">
-					<input required="required" type="password" class="form-control" id="password" placeholder="Password">
-				</div>
-			</div>
 			
-			<button id="login" type="submit" class="btn btn-primary col-md-offset-4 col-md-4">Login</button>
+			<button id="concluir" type="submit" class="btn btn-primary col-md-offset-4 col-md-4">Concluir</button>
 		</form>
-		
-		
-		
-
-	
   </body>
 </html>

@@ -32,6 +32,7 @@ public class Teste {
 		controller.getLogin();
 		controller.pesquisarChamado();
 		controller.alterarChamado();
+		controller.darPermissaoADM();
     }
 	
 	public static void initialize (){
