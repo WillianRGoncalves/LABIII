@@ -75,7 +75,7 @@ public void getLogin(){
 	            JSONArray jsonResult = new JSONArray();
          	    JSONObject jsonObj = new JSONObject();
 
-        		jsonObj.put("acesso", false);
+        		jsonObj.put("acesso", "");
         		
         		
              	jsonResult.put(jsonObj);

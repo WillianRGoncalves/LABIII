@@ -22,13 +22,13 @@
 				
 				$.getJSON("/login/"+username+"/"+password+"?format=json&jsoncallback=",function(data) {
 					//Melhorar Lógica dos If
-					if(!data[0].acesso){
+					if(data[0].acesso == '0'){
 						
 						alert("Usuário Comum");
 						window.location.href = '/darpermissao.html';
 						
 					}else{
-						if(data[0].acesso){
+						if(data[0].acesso == '1'){
 							window.location.href = '/pesquisarchamadoid.html';
 						}else{
 							alert("Usuário não cadastrado");
