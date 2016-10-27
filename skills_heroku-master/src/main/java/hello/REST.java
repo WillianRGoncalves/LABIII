@@ -44,14 +44,14 @@ public void getLogin(){
 	            
 	            
 	            try {
-	            	User user = model.login(request.params(":username"), request.params(":password"));
+	            	Usuario user = model.login(request.params(":username"), request.params(":password"));
 	            	
 	            	if(user != null){
 	            		
 	            		JSONArray jsonResult = new JSONArray();
 		         	    JSONObject jsonObj = new JSONObject();
 		         	    
-		         	    jsonObj.put("acesso", user.getAcesso());
+		         	    jsonObj.put("acesso", user.getUsuarioAcesso());
 		        				        		
 		             	jsonResult.put(jsonObj);
 		             	
@@ -113,10 +113,10 @@ public void pesquisarChamado(){
 	            		JSONArray jsonResult = new JSONArray();
 		         	    JSONObject jsonObj = new JSONObject();
 
-		        		jsonObj.put("nome", chamado.getNome());
-		        		jsonObj.put("descricao", chamado.getDescricao());
-		        		if(chamado.isResolvido())	jsonObj.put("resolvido", "1");
-		        		else						jsonObj.put("resolvido", "0");
+		        		jsonObj.put("chamadoNome", chamado.getChamadoNome());
+		        		jsonObj.put("chamadoDescricao", chamado.getChamadoDescricao());
+		        		if(chamado.isChamadoResolvido())	jsonObj.put("chamadoResolvido", "1");
+		        		else						jsonObj.put("chamadoResolvido", "0");
 		        		
 		             	jsonResult.put(jsonObj);
 		             	
@@ -140,9 +140,9 @@ public void pesquisarChamado(){
 	            JSONArray jsonResult = new JSONArray();
         	    JSONObject jsonObj = new JSONObject();
 
-        	    jsonObj.put("nome", "");
-        		jsonObj.put("descricao", "");
-        		jsonObj.put("resolvido", "");
+        	    jsonObj.put("chamadoNome", "");
+        		jsonObj.put("chamadoDescricao", "");
+        		jsonObj.put("chamadoResolvido", "");
        		
        		
             	jsonResult.put(jsonObj);
