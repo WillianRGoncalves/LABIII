@@ -86,7 +86,7 @@ public class Model{
 	    return null;
 	}
 	
-	public boolean darPermissao(String email){
+	public boolean darUsuarioAcesso(String email){
 		Usuario user = pesquisarUsuarioNome(email);
 		if (user == null) return false;
 		user.setUsuarioAcesso(1);

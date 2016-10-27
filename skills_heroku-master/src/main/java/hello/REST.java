@@ -227,7 +227,7 @@ public void darPermissaoADM(){
            response.header("Access-Control-Allow-Origin", "*");
    	    
            try {
-        	   boolean resultado = model.darPermissao(request.params(":username"));
+        	   boolean resultado = model.darUsuarioAcesso(request.params(":username"));
             	
             	if(resultado){
             		
