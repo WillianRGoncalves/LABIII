@@ -218,7 +218,6 @@ public void alterarChamado(){
 }
 
 
-//TODO: ALTERAÇÕES NA REST, ESTE MÉTODO REFAZER
 public void darPermissaoADM(){
 	get("/darpermissao/:username", new Route() {
 		@Override

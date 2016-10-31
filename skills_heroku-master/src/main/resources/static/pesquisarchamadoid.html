@@ -22,11 +22,11 @@
 				$.post("/pesquisarchamadoid", JSON.stringify({'idChamado': idChamado}), function(data){
 						
 						
-					if(data[0].nome != ""){
+					if(data[0].chamadoNome != ""){
 							sessionStorage.setItem("idChamado",idChamado);
-							sessionStorage.setItem("nomeChamado", data[0].nome);
-							sessionStorage.setItem("descricaoChamado", data[0].descricao);
-							sessionStorage.setItem("resolvidoChamado", data[0].resolvido);
+							sessionStorage.setItem("nomeChamado", data[0].chamadoNome);
+							sessionStorage.setItem("descricaoChamado", data[0].chamadoDescricao);
+							sessionStorage.setItem("resolvidoChamado", data[0].chamadoResolvido);
 							
 							window.location.href = '/alterado.html';
 						

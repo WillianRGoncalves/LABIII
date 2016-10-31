@@ -81,7 +81,7 @@ public class Model{
 	
 	public Usuario login(String email, String senha){
 	    for(Usuario user: consultarTodosUsuarios()){
-	    	if(user.getUsuarioNome().equals(email)) return user;
+	    	if(user.getUsuarioNome().equals(email) && user.getUsuarioSenha().equals(senha)) return user;
 	    }
 	    return null;
 	}
@@ -94,5 +94,6 @@ public class Model{
 		usuarios.commit();
 		return true;
 	}
+	
 	
 }
