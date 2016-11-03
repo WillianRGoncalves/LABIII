@@ -95,5 +95,11 @@ public class Model{
 		return true;
 	}
 	
+	public List<Chamado> consultarChamadosData(){
+		List<Chamado> a = consultarTodosChamados();
+		a.sort(null);
+		return a;
+	}
+	
 	
 }

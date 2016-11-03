@@ -31,7 +31,7 @@ public class REST{
 	}
 	
 	
-public void getLogin(){
+	public void getLogin(){
 		
 		get("/login/:username/:password", new Route() {
 			@Override
@@ -90,7 +90,7 @@ public void getLogin(){
 
 	}
 	
-public void pesquisarChamado(){
+	public void pesquisarChamado(){
 		
 		post("/pesquisarchamadoid", new Route() {
 			@Override
@@ -157,118 +157,118 @@ public void pesquisarChamado(){
          
 	}
 	
-public void alterarChamado(){
+	public void alterarChamado(){
+		
+		get("/alterado/:idChamado/:nomeChamado/:descricaoChamado/:resolvidoChamado", new Route() {
+			@Override
+	        public Object handle(final Request request, final Response response){
+	        	
+	        	 
+	        	 
+	        	response.header("Access-Control-Allow-Origin", "*");
+	        	 
+	            
+	            
+	            try {
+	            	char resolvido = request.params(":resolvidoChamado").charAt(0);
+	            	boolean alterado = model.editarChamado(request.params(":idChamado"), request.params(":nomeChamado"), request.params(":descricaoChamado"), resolvido);
+	            	
+	            	//if(user != null){
+	            		
+	            		JSONArray jsonResult = new JSONArray();
+		         	    JSONObject jsonObj = new JSONObject();
+		         	    
+		         	    jsonObj.put("alterado", alterado);
+		        				        		
+		             	jsonResult.put(jsonObj);
+		             	
+		             	return jsonResult;
+	            		
+	            	//} else {
+	            		
+	            		
+	            		
+	            	//}
+	            	
+	            	
+	             	
+	        		} catch (JSONException e) {
+	        				
+	        			//e.printStackTrace();
 	
-	get("/alterado/:idChamado/:nomeChamado/:descricaoChamado/:resolvidoChamado", new Route() {
-		@Override
-        public Object handle(final Request request, final Response response){
-        	
-        	 
-        	 
-        	response.header("Access-Control-Allow-Origin", "*");
-        	 
-            
-            
-            try {
-            	char resolvido = request.params(":resolvidoChamado").charAt(0);
-            	boolean alterado = model.editarChamado(request.params(":idChamado"), request.params(":nomeChamado"), request.params(":descricaoChamado"), resolvido);
-            	
-            	//if(user != null){
-            		
-            		JSONArray jsonResult = new JSONArray();
-	         	    JSONObject jsonObj = new JSONObject();
-	         	    
-	         	    jsonObj.put("alterado", alterado);
-	        				        		
-	             	jsonResult.put(jsonObj);
+	        		}
+	         	    	
+	
+	            JSONArray jsonResult = new JSONArray();
+	     	    JSONObject jsonObj = new JSONObject();
+	
+	    		jsonObj.put("alterado", false);
+	    		
+	    		
+	         	jsonResult.put(jsonObj);
+	         	
+	         	return jsonResult;
+	            
+	     	     
+	         }
+	         
+	      });
+	
+	     
+	}
+
+
+	public void darPermissaoADM(){
+		get("/darpermissao/:username", new Route() {
+			@Override
+	        public Object handle(final Request request, final Response response){
+	        	
+	           response.header("Access-Control-Allow-Origin", "*");
+	   	    
+	           try {
+	        	   boolean resultado = model.darUsuarioAcesso(request.params(":username"));
+	            	
+	            	if(resultado){
+	            		
+	            		JSONArray jsonResult = new JSONArray();
+		         	    JSONObject jsonObj = new JSONObject();
+	
+		        		jsonObj.put("resultado", resultado);
+		        		
+		             	jsonResult.put(jsonObj);
+		             	
+		             	return jsonResult;
+	            		
+	            	} else {
+	            		
+	            		
+	            		
+	            	}
+	            	
+	            	
 	             	
-	             	return jsonResult;
-            		
-            	//} else {
-            		
-            		
-            		
-            	//}
-            	
-            	
-             	
-        		} catch (JSONException e) {
-        				
-        			//e.printStackTrace();
-
-        		}
-         	    	
-
-            JSONArray jsonResult = new JSONArray();
-     	    JSONObject jsonObj = new JSONObject();
-
-    		jsonObj.put("alterado", false);
-    		
-    		
-         	jsonResult.put(jsonObj);
-         	
-         	return jsonResult;
-            
-     	     
-         }
-         
-      });
-
-     
-}
-
-
-public void darPermissaoADM(){
-	get("/darpermissao/:username", new Route() {
-		@Override
-        public Object handle(final Request request, final Response response){
-        	
-           response.header("Access-Control-Allow-Origin", "*");
-   	    
-           try {
-        	   boolean resultado = model.darUsuarioAcesso(request.params(":username"));
-            	
-            	if(resultado){
-            		
-            		JSONArray jsonResult = new JSONArray();
-	         	    JSONObject jsonObj = new JSONObject();
-
-	        		jsonObj.put("resultado", resultado);
-	        		
-	             	jsonResult.put(jsonObj);
-	             	
-	             	return jsonResult;
-            		
-            	} else {
-            		
-            		
-            		
-            	}
-            	
-            	
-             	
-        		} catch (JSONException e) {
-        				
-        			//e.printStackTrace();
-
-        		}
-         	    	
-
-            JSONArray jsonResult = new JSONArray();
-    	    JSONObject jsonObj = new JSONObject();
-
-    	    jsonObj.put("resultado", false);
-
-   		
-        	jsonResult.put(jsonObj);
-        	
-        	return jsonResult;
-     	   
-     	   
-        	
-	   }
-	});     
-
-}
+	        		} catch (JSONException e) {
+	        				
+	        			//e.printStackTrace();
+	
+	        		}
+	         	    	
+	
+	            JSONArray jsonResult = new JSONArray();
+	    	    JSONObject jsonObj = new JSONObject();
+	
+	    	    jsonObj.put("resultado", false);
+	
+	   		
+	        	jsonResult.put(jsonObj);
+	        	
+	        	return jsonResult;
+	     	   
+	     	   
+	        	
+		   }
+		});     
+	
+	}
 	
 }

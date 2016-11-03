@@ -37,12 +37,13 @@ public class Teste {
 	
 	public static void initialize (){
 		//Variáveis sendo inicializadas para teste estático
-		model.excluirTodosChamados();
-		model.excluirTodosUsuarios();
+/*		model.excluirTodosChamados();
+		model.excluirTodosUsuarios();*/
 		model.adicioarUsuario(new Usuario("teste@teste.com", "123456"));
 		model.adicioarUsuario(new Usuario("willian@teste.com", "123456"));
 		model.adicioarUsuario(new Usuario("novo@teste.com", "abc"));
 		
 		model.adicionarChamado(new Chamado("Teste Chamado", "Esse é um teste do chamado", "17/09/2016"));
+		model.adicionarChamado(new Chamado("Novo Teste", "That's a new test folks", "03/11/2016"));
 	}
 }
