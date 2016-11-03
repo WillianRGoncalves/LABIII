@@ -217,7 +217,6 @@ public class REST{
 	     
 	}
 
-
 	public void darPermissaoADM(){
 		get("/darpermissao/:username", new Route() {
 			@Override
@@ -271,4 +270,34 @@ public class REST{
 	
 	}
 	
+	public void listarChamados(){
+		get("/listarChamados", new Route(){
+			
+			public Object handle(final Request request, final Response response){
+				response.header("Access-Control-Allow-Origin", "*");
+				
+				JSONArray jsonArray = new JSONArray();
+				
+				try{
+					List<Chamado> chamados = model.consultarChamadosData();
+					
+					for(Chamado chamado : chamados){
+						JSONObject jsonObject = new JSONObject();
+						jsonObject.put("numeroChamado", chamado.getChamadoId());
+						jsonObject.put("nomeUsuarioChamado", chamado.getChamadoAutor());
+						jsonObject.put("descricaoChamado", chamado.getChamadoDescricao());
+						jsonObject.put("dataChamado", chamado.getChamadoData());
+						jsonObject.put("situacaoChamado", chamado.isChamadoResolvido());
+						jsonArray.put(jsonObject);
+					}
+					return jsonArray;
+					
+				}catch(JSONException e){
+					e.printStackTrace();
+				}
+				
+				return null;
+			}
+		});
+	}
 }

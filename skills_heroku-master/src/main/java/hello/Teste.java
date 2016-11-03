@@ -33,6 +33,7 @@ public class Teste {
 		controller.pesquisarChamado();
 		controller.alterarChamado();
 		controller.darPermissaoADM();
+		controller.listarChamados();
     }
 	
 	public static void initialize (){
