@@ -1,8 +1,7 @@
 package hello;
 
-//import java.util.LinkedList;
+import java.util.LinkedList;
 import java.util.List;
-
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
@@ -24,17 +23,21 @@ public class Model{
 	//End métodos de teste estático
 	
 	private List<Usuario> consultarTodosUsuarios(){
+		List<Usuario> allUsuarios = new LinkedList<>();
 		Query query = usuarios.query();
 		query.constrain(Usuario.class);
 	    ObjectSet<Usuario> todosUsuarios = query.execute();
-	    return todosUsuarios;
+	    for(Usuario usuario: todosUsuarios) allUsuarios.add(usuario);
+	    return allUsuarios;
 	}
 	
-	private List<Chamado> consultarTodosChamados(){
+	public List<Chamado> consultarTodosChamados(){
+		List<Chamado> allChamados = new LinkedList<>();
 		Query query = chamados.query();
 		query.constrain(Chamado.class);
 		ObjectSet<Chamado> todosChamados = query.execute();
-		return todosChamados;
+		for(Chamado chamado: todosChamados) allChamados.add(chamado);
+		return allChamados;
 	}
 	
 	public boolean ePrimeiroUsuario(){
@@ -96,7 +99,8 @@ public class Model{
 	}
 	
 	public List<Chamado> consultarChamadosData(){
-		List<Chamado> a = consultarTodosChamados();
+		List<Chamado> a = new LinkedList<>();
+		a = consultarTodosChamados();
 		a.sort(null);
 		return a;
 	}
