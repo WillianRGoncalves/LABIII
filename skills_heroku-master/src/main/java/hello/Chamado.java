@@ -16,10 +16,11 @@ public class Chamado implements Comparable <Chamado> {
 	String chamadoAutor;
 	boolean chamadoResolvido;
 	
-	public Chamado(String chamadoNome, String chamadoDescricao, String chamadoData) {
+	public Chamado(String chamadoNome, String chamadoDescricao, String chamadoData, int chamadoPrioridade) {
 		this.chamadoNome = chamadoNome;
 		this.chamadoDescricao = chamadoDescricao;
 		this.chamadoData = chamadoData;
+		this.chamadoPrioridade = chamadoPrioridade;
 	}
 
 	@Override

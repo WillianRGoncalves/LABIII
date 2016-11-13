@@ -279,7 +279,7 @@ public class REST{
 				JSONArray jsonArray = new JSONArray();
 				
 				try{
-					List<Chamado> chamados = model.consultarChamadosData();
+					List<Chamado> chamados = model.consultarChamadosPrioridade();
 					
 					for(Chamado chamado : chamados){
 						JSONObject jsonObject = new JSONObject();

@@ -1,5 +1,6 @@
 package hello;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import com.db4o.Db4oEmbedded;
@@ -103,6 +104,23 @@ public class Model{
 		a = consultarTodosChamados();
 		a.sort(null);
 		return a;
+	}
+	
+	public List<Chamado> consultarChamadosPrioridade(){
+		List<Chamado> p3 = new ArrayList();
+		List<Chamado> p2 = new ArrayList();
+		List<Chamado> p1 = new ArrayList();
+		for(Chamado chamado: consultarTodosChamados()){
+			if(chamado.getChamadoPrioridade() == 3) p3.add(chamado);
+			else if(chamado.getChamadoPrioridade() == 2) p2.add(chamado);
+			else if(chamado.getChamadoPrioridade() == 1) p1.add(chamado);
+		}
+		p3.sort(null);
+		p2.sort(null);
+		p1.sort(null);
+		p3.addAll(p2);
+		p3.addAll(p1);
+		return p3;
 	}
 	
 	
