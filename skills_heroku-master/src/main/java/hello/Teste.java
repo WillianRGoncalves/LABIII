@@ -47,7 +47,9 @@ public class Teste {
 		model.adicioarUsuario(new Usuario("willian@teste.com", "123456"));
 		model.adicioarUsuario(new Usuario("novo@teste.com", "abc"));
 		
-		model.adicionarChamado(new Chamado("Teste Chamado", "Esse é um teste do chamado", "17/09/2016",2));
-		model.adicionarChamado(new Chamado("Novo Teste", "That's a new test folks", "03/02/2016",3));
+		model.adicionarChamado(new Chamado("Teste Chamado", "Esse é um teste do chamado", "17/09/2016",3));
+		model.adicionarChamado(new Chamado("Novo Teste", "That's a new test folks", "03/02/2016",1));
+		
+		
 	}
 }

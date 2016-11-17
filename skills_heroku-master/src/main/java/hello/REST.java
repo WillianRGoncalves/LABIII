@@ -7,6 +7,7 @@ import static spark.Spark.post;
 
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -271,7 +272,7 @@ public class REST{
 	}
 	
 	public void listarChamados(){
-		get("/listarChamados", new Route(){
+		get("/listarChamados/:tipoListagem", new Route(){
 			
 			public Object handle(final Request request, final Response response){
 				response.header("Access-Control-Allow-Origin", "*");
@@ -279,7 +280,9 @@ public class REST{
 				JSONArray jsonArray = new JSONArray();
 				
 				try{
-					List<Chamado> chamados = model.consultarChamadosPrioridade();
+					List<Chamado> chamados = new ArrayList<>();
+					if (request.params(":tipoListagem").equals("0")) chamados = model.consultarChamadosData();
+					else chamados = model.consultarChamadosPrioridade();
 					
 					for(Chamado chamado : chamados){
 						JSONObject jsonObject = new JSONObject();
