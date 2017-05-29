@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Administrador</title>
+  <head>
+    <meta charset="utf-8">
+	
+    <title>ADM Menu</title>
+    
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<link href="css/bootstrap.min.css" rel=stylesheet>
+	
+
+	<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel=stylesheet>
 	
 	
 	<script>
@@ -19,20 +23,16 @@
 		}
 	</script>
    
-</head>
-<body>
-
-
-		<ul class="nav nav-pills">
-			<li class="active"><a href="administrador.html">Painel de Controle</a></li>
-			<li><a href="abrirChamado.html">Abrir Chamado</a></li>
-			<li><a href="exibirchamados.html">Listar Chamados</a></li>
-			<li><a href="darpermissao.html">Dar Permissão</a></li>
-			<li><a href="pesquisarchamadoid.html">Edição de Chamado Específico</a></li>
-			
-		</ul>
-
-
+  </head>
+  <body>
+	<br>
+	<button onclick="chamadoId()" class="btn btn-primary col-md-offset-4 col-md-4">Pesquisar chamado por Id</button>
+	<br>
+	<br>
+	<button onclick="novoADM()" class="btn btn-primary col-md-offset-4 col-md-4">Novo administrador</button>
+	<br>
+	<br>
+	<button onclick="allChamados()" class="btn btn-primary col-md-offset-4 col-md-4">Allchamados</button>
 	
-</body>
+  </body>
 </html>
